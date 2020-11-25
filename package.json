@@ -1,0 +1,48 @@
+{
+  "name": "homebridge-onkyo-pioneer",
+  "description": "Homebridge Plugin for Onkyo & Pioneer Audio Receivers",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nitaybz/homebridge-onkyo-pioneer.git"
+  },
+  "license": "MIT",
+  "preferGlobal": true,
+  "keywords": [
+    "homebridge-plugin",
+    "homebridge-onkyo-pioneer",
+    "homebridge-onkyo",
+    "homebridge-pioneer"
+  ],
+  "bugs": {
+    "url": "https://github.com/nitaybz/homebridge-onkyo-pioneer/issues"
+  },
+  "engines": {
+    "node": ">=10.17.0",
+    "homebridge": ">=1.1.6"
+  },
+  "dependencies": {
+    "onkyo.js": "github:nitaybz/onkyo.js"
+  },
+  "devDependencies": {
+    "eslint": "^7.11.0"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "funding": [
+    {
+      "type": "paypal",
+      "url": "https://paypal.me/nitaybz"
+    },
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/nitaybz"
+    },
+    {
+      "type": "kofi",
+      "url": "https://ko-fi.com/nitaybz"
+    }
+  ]
+}

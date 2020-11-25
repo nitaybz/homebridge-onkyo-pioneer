@@ -1,0 +1,39 @@
+{
+  "bridge": {
+    "name": "Homebridge",
+    "username": "CD:22:3D:E3:CE:30",
+    "port": 51826,
+    "pin": "031-45-154"
+  },
+
+  "description": "This is an example configuration for homebridge-onkyo-pioneer",
+  "platforms": [
+    {
+      "platform": "OnkyoPioneer",
+      "discovery": true,
+      "debug": false,
+      "statePollingInterval": 10,
+      "receivers": [
+        {
+          "ip": "10.0.0.2",
+          "name": "Bedroom Receiver",
+          "maxVolume": 100,
+          "volumeAccessory": "speaker"
+        },
+        {
+          "ip": "10.0.0.5",
+          "name": "Living Room Receiver",
+          "maxVolume": 120,
+          "volumeAccessory": "bulb",
+          "enableZone2": true,
+          "zone2MaxVolume": 150,
+          "enableZone3": true,
+          "zone3MaxVolume": 130
+        }
+      ]
+    }
+  ],
+
+  "accessories": [
+  ]
+}

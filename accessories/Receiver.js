@@ -158,7 +158,7 @@ class AUDIO_RECEIVER {
 
 		this.bulbService.getCharacteristic(Characteristic.On)
 			.on('set',stateManager.set.ExternalMute.bind(this))
-			.updateValue(!!this.state.mute)
+			.updateValue(!this.state.mute)
 
 		this.bulbService.getCharacteristic(Characteristic.Brightness)
 			.on('set',stateManager.set.ExternalVolume.bind(this))
@@ -180,7 +180,7 @@ class AUDIO_RECEIVER {
 
 		this.fanService.getCharacteristic(Characteristic.On)
 			.on('set',stateManager.set.ExternalMute.bind(this))
-			.updateValue(!!this.state.mute)
+			.updateValue(!this.state.mute)
 
 		this.fanService.getCharacteristic(Characteristic.RotationSpeed)
 			.on('set',stateManager.set.ExternalVolume.bind(this))
@@ -237,11 +237,11 @@ class AUDIO_RECEIVER {
 
 			switch(this.volume.type) {
 				case 'bulb':
-					this.bulbService.getCharacteristic(Characteristic.On).updateValue(!!this.state.mute)
+					this.bulbService.getCharacteristic(Characteristic.On).updateValue(!this.state.mute)
 					this.bulbService.getCharacteristic(Characteristic.Brightness).updateValue(this.state.volume)
 					break;
 				case 'fan':
-					this.fanService.getCharacteristic(Characteristic.On).updateValue(!!this.state.mute)
+					this.fanService.getCharacteristic(Characteristic.On).updateValue(!this.state.mute)
 					this.fanService.getCharacteristic(Characteristic.RotationSpeed).updateValue(this.state.volume)
 					break;
 				// case 'speaker':

@@ -20,7 +20,7 @@ class OnkyoPioneer {
 		this.PLUGIN_NAME = PLUGIN_NAME
 		this.PLATFORM_NAME = PLATFORM_NAME
 		this.name = config.name || PLATFORM_NAME
-		this.discovery = config.autoDiscovery
+		this.discovery = config.discovery
 		this.receivers = config.receivers || []
 		this.statePollingInterval = config.statePollingInterval
 		if (this.statePollingInterval < 3)

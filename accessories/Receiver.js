@@ -145,9 +145,9 @@ class AUDIO_RECEIVER {
 			case 'fan':
 				this.addFanService()
 				break;
-			case 'speaker':
-				this.addSmartSpeakerService()
-				break;
+			// case 'speaker':
+			// 	this.addSmartSpeakerService()
+			// 	break;
 		}
 
 	}
@@ -244,10 +244,10 @@ class AUDIO_RECEIVER {
 					this.fanService.getCharacteristic(Characteristic.On).updateValue(!!this.state.mute)
 					this.fanService.getCharacteristic(Characteristic.RotationSpeed).updateValue(this.state.volume)
 					break;
-				case 'speaker':
-					this.smartSpeakerService.getCharacteristic(Characteristic.Mute).updateValue(this.state.mute)
-					this.smartSpeakerService.getCharacteristic(Characteristic.Volume).updateValue(this.state.volume)
-					break;
+				// case 'speaker':
+				// 	this.smartSpeakerService.getCharacteristic(Characteristic.Mute).updateValue(this.state.mute)
+				// 	this.smartSpeakerService.getCharacteristic(Characteristic.Volume).updateValue(this.state.volume)
+				// 	break;
 			}
 			setTimeout(() => {
 				this.processing = false

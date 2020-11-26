@@ -51,9 +51,8 @@
                       "type": "string",
                       "required": false,
                       "oneOf": [
-                        { "title": "Light Bulb", "enum": ["bulb"] },
-                        { "title": "Fan", "enum": ["outlet"] },
-                        { "title": "Smart Speaker", "enum": ["speaker"] }
+                        { "title": "Fan", "enum": ["fan"] },
+                        { "title": "Light Bulb", "enum": ["bulb"] }
                       ]
                   },
                   "maxVolume": {
@@ -72,7 +71,6 @@
                   "zone2MaxVolume": {
                     "title": "Zone 2 Max Volume",
                     "description": "Adjust if the maximum volume in HomeKit is too high or too low",
-                    "default": 100,
                     "type": "integer",
                     "minimum": 1,
                     "maximum": 200
@@ -85,7 +83,6 @@
                   "zone3MaxVolume": {
                     "title": "Zone 3 Max Volume",
                     "description": "Adjust if the maximum volume in HomeKit is too high or too low",
-                    "default": 100,
                     "type": "integer",
                     "minimum": 1,
                     "maximum": 200

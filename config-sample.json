@@ -18,7 +18,7 @@
           "ip": "10.0.0.2",
           "name": "Bedroom Receiver",
           "maxVolume": 100,
-          "volumeAccessory": "speaker"
+          "volumeAccessory": "fan"
         },
         {
           "ip": "10.0.0.5",

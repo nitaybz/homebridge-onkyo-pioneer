@@ -5,143 +5,152 @@
   "headerDisplay": "**IN DEVELOPMENT** - Homebridge plugin for Onkyo & Pioneer Audio Receivers",
   "footerDisplay": "Created by @nitaybz",
   "schema": {
-      "type": "object",
-      "properties": {
-        "discover": {
-            "title": "Discover and log supported devices",
-            "description": "When enabled it will discover and print supported devices to the logs",
-            "type": "boolean",
-            "required": false
-          },
-          "statePollingInterval": {
-            "title": "Status Polling Interval in Seconds",
-            "description": "Time in seconds between each status polling of the avr devices",
-            "default": 30,
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 300
-          },
-          "debug": {
-              "title": "Enable Debug Logs",
-              "description": "When checked, the plugin will produce extra logs for debugging purposes",
-              "type": "boolean",
-              "default": false,
-              "required": false
-          },
-          "receivers": {
-              "type": "array",
-              "required": false,
-              "items": {
-                "title": "Audio Receivers",
-                "type": "object",
-                "properties": {
-                  "ip": {
-                      "title": "IP Address (IPv4)",
-                      "type": "string",
-                      "required": true
-                  },
-                  "name": {
-                      "title": "Name",
-                      "type": "string",
-                      "required": false
-                  },
-                  "volumeAccessory": {
-                      "title": "External Volume Accessory",
-                      "description": "Extra accessory for better volume control",
-                      "type": "string",
-                      "required": false,
-                      "oneOf": [
-                        { "title": "Fan", "enum": ["fan"] },
-                        { "title": "Light Bulb", "enum": ["bulb"] }
-                      ]
-                  },
-                  "maxVolume": {
-                    "title": "Main Zone Max Volume",
-                    "description": "Adjust if the maximum volume in HomeKit is too high or too low",
-                    "default": 100,
-                    "type": "integer",
-                    "minimum": 1,
-                    "maximum": 200
-                  },
-                  "enableZone2": {
-                      "title": "Enable Zone 2",
-                      "type": "boolean",
-                      "required": false
-                  },
-                  "zone2MaxVolume": {
-                    "title": "Zone 2 Max Volume",
-                    "description": "Adjust if the maximum volume in HomeKit is too high or too low",
-                    "type": "integer",
-                    "minimum": 1,
-                    "maximum": 200
-                  },
-                  "enableZone3": {
-                      "title": "Enable Zone 3",
-                      "type": "boolean",
-                      "required": false
-                  },
-                  "zone3MaxVolume": {
-                    "title": "Zone 3 Max Volume",
-                    "description": "Adjust if the maximum volume in HomeKit is too high or too low",
-                    "type": "integer",
-                    "minimum": 1,
-                    "maximum": 200
-                  }
-
-                }
-              }
-          }
-      }
-  },
-    "layout": [
-      {
-        "key": "discover"
+    "type": "object",
+    "properties": {
+      "discover": {
+        "title": "Discover and log supported devices",
+        "description": "When enabled it will discover and print supported devices to the logs",
+        "type": "boolean",
+        "required": false
       },
-      {
-        "key": "statePollingInterval"
+      "statePollingInterval": {
+        "title": "Status Polling Interval in Seconds",
+        "description": "Time in seconds between each status polling of the avr devices",
+        "default": 30,
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 300
       },
-      {
-        "key": "debug"
+      "debug": {
+        "title": "Enable Debug Logs",
+        "description": "When checked, the plugin will produce extra logs for debugging purposes",
+        "type": "boolean",
+        "default": false,
+        "required": false
       },
-      {
-        "key": "receivers",
+      "receivers": {
         "type": "array",
-        "title": "Audio Receivers",
-        "orderable": false,
-        "buttonText": "Add Receiver",
-        "expandable": true,
-        "expanded": true,
-        "items": [
-          {
-            "type": "section",
-            "expandable": false,
-            "title": "Configurations (Main Zone)",
-            "items": [
-              "receivers[].ip",
-              "receivers[].name",
-              "receivers[].volumeAccessory",
-              "receivers[].maxVolume"
-            ]
-          },
-          {
-            "type": "section",
-            "expandable": true,
-            "title": "Zone 2",
-            "items": [
-              "receivers[].enableZone2",
-              "receivers[].zone2MaxVolume"
-            ]
-          },
-          {
-            "type": "section",
-            "expandable": true,
-            "title": "Zone 3",
-            "items": [
-              "receivers[].enableZone3",
-              "receivers[].zone3MaxVolume"
-            ]
+        "required": false,
+        "items": {
+          "title": "Audio Receivers",
+          "type": "object",
+          "properties": {
+            "ip": {
+              "title": "IP Address (IPv4)",
+              "type": "string",
+              "required": true
+            },
+            "name": {
+              "title": "Name",
+              "type": "string",
+              "required": false
+            },
+            "volumeAccessory": {
+              "title": "External Volume Accessory",
+              "description": "Extra accessory for better volume control",
+              "type": "string",
+              "required": false,
+              "oneOf": [
+                {
+                  "title": "Fan",
+                  "enum": [
+                    "fan"
+                  ]
+                },
+                {
+                  "title": "Light Bulb",
+                  "enum": [
+                    "bulb"
+                  ]
+                }
+              ]
+            },
+            "maxVolume": {
+              "title": "Main Zone Max Volume",
+              "description": "Adjust if the maximum volume in HomeKit is too high or too low",
+              "default": 100,
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            },
+            "enableZone2": {
+              "title": "Enable Zone 2",
+              "type": "boolean",
+              "required": false
+            },
+            "zone2MaxVolume": {
+              "title": "Zone 2 Max Volume",
+              "description": "Adjust if the maximum volume in HomeKit is too high or too low",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            },
+            "enableZone3": {
+              "title": "Enable Zone 3",
+              "type": "boolean",
+              "required": false
+            },
+            "zone3MaxVolume": {
+              "title": "Zone 3 Max Volume",
+              "description": "Adjust if the maximum volume in HomeKit is too high or too low",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            }
           }
-        ]
+        }
       }
-    ]
+    }
+  },
+  "layout": [
+    {
+      "key": "discover"
+    },
+    {
+      "key": "statePollingInterval"
+    },
+    {
+      "key": "debug"
+    },
+    {
+      "key": "receivers",
+      "type": "array",
+      "title": "Audio Receivers",
+      "orderable": false,
+      "buttonText": "Add Receiver",
+      "expandable": true,
+      "expanded": true,
+      "items": [
+        {
+          "type": "section",
+          "expandable": false,
+          "title": "Configurations (Main Zone)",
+          "items": [
+            "receivers[].ip",
+            "receivers[].name",
+            "receivers[].volumeAccessory",
+            "receivers[].maxVolume",
+            {
+              "type": "section",
+              "expandable": true,
+              "title": "Zone 2",
+              "items": [
+                "receivers[].enableZone2",
+                "receivers[].zone2MaxVolume"
+              ]
+            },
+            {
+              "type": "section",
+              "expandable": true,
+              "title": "Zone 3",
+              "items": [
+                "receivers[].enableZone3",
+                "receivers[].zone3MaxVolume"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

@@ -14,7 +14,7 @@ class AUDIO_RECEIVER {
 		this.avrId = config.id
 		this.id = `${config.id}_${config.zone}`
 		this.zone = config.zone
-		this.name = config.name || `${config.avrName}  ${this.zone.charAt(0).toUpperCase() + this.zone.slice(1)}`
+		this.name = config.name || `${config.avrName} ${this.zone.charAt(0).toUpperCase() + this.zone.slice(1)}`
 		this.serial = this.id
 		this.model = config.model || 'unknown'
 		this.manufacturer = this.model.toLowerCase().includes('vsx') ? 'Pioneer' : 'Onkyo'
@@ -23,8 +23,10 @@ class AUDIO_RECEIVER {
 		this.maxVolume = config.maxVolume || 100
 		this.volume = config.volume
 		if (!this.volume.name)
-			this.volume.name = this.name + ' Volume'
+			this.volume.name = `${this.name} Volume`
 
+
+		this.cachedStates = platform.cachedStates
 		this.cachedDevices = platform.cachedDevices
 		this.cachedDevice = this.cachedDevices.find(cachedDevice => cachedDevice.id === this.avrId)
 		
@@ -47,15 +49,20 @@ class AUDIO_RECEIVER {
 
 		
 		this.setServices()
-			.then(this.api.publishExternalAccessories(platform.PLUGIN_NAME, [this.accessory]))
+			.then(() => {
+				this.api.publishExternalAccessories(platform.PLUGIN_NAME, [this.accessory])
+				setInterval(this.updateState.bind(this), platform.statePollingInterval * 1000)
+			})
+			.catch(err => {
+				this.log('ERROR setting services')
+				this.log(err)
+			}) 
 
-		setInterval(this.updateState.bind(this), this.statePollingInterval)
     
 	}
 
 	async setServices() {
-
-		this.state = await stateManager.getState()
+		this.state = await stateManager.getState.bind(this)()
 
 		this.tvService = this.accessory.addService(Service.Television, this.name)
 
@@ -84,6 +91,7 @@ class AUDIO_RECEIVER {
 
 		// Set inputs
 		this.inputs.forEach(input => {
+			this.log.easyDebug(`${this.name} - Adding INPUT: ${input.name}`)
 			const inputUUID = this.api.hap.uuid.generate(this.id + input.key)
 			const inputService = this.accessory.addService(Service.InputSource, input.name, inputUUID)
 				.setCharacteristic(Characteristic.Identifier, input.identifier)
@@ -109,7 +117,7 @@ class AUDIO_RECEIVER {
 					this.storage.setItem('cachedDevices', this.cachedDevices)
 					callback()
 				})
-				.updateValue(this.name)
+				.updateValue(input.name)
 
 			this.tvService.addLinkedService(inputService)
 		})
@@ -220,7 +228,7 @@ class AUDIO_RECEIVER {
 
 		if (!this.processing) {
 			this.processing = true
-			this.state = await stateManager.getState()
+			this.state = await stateManager.getState.bind(this)()
 
 			this.tvService.getCharacteristic(Characteristic.Active).updateValue(this.state.power)
 			this.tvService.getCharacteristic(Characteristic.ActiveIdentifier).updateValue(this.state.source)

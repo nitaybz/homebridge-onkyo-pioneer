@@ -19,7 +19,7 @@ ______________
 ### Requirements
 
 <img src="https://img.shields.io/badge/node-%3E%3D10.17-brightgreen"> &nbsp;
-<img src="https://img.shields.io/badge/homebridge-%3E%3D0.4.4-brightgreen">
+<img src="https://img.shields.io/badge/homebridge-%3E%3D1.1.6-brightgreen">
 
 check with: `node -v` & `homebridge -V` and update if needed
 

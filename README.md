@@ -13,8 +13,7 @@ ______________
 
 [Homebridge](https://github.com/nfarina/homebridge) plugin for Onkyo and Pioneer Audio Receivers
 
-
-  <img src="branding/product.jpg">
+<img src="branding/product.jpg">
 
 ### Requirements
 

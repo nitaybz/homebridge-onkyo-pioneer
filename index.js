@@ -4,6 +4,20 @@ const PLATFORM_NAME = 'OnkyoPioneer'
 const storage = require('node-persist')
 const path = require('path')
 
+const DEFAULT_STATE_POLLING_INTERVAL = 30 // seconds, matches config.schema.json
+const MIN_STATE_POLLING_INTERVAL = 3 // seconds
+
+// Always returns a finite number of seconds >= MIN_STATE_POLLING_INTERVAL.
+// Missing, empty or non-numeric values fall back to the default.
+const resolveStatePollingInterval = (value) => {
+	if (value === undefined || value === null || value === '')
+		return DEFAULT_STATE_POLLING_INTERVAL
+	const seconds = Number(value)
+	if (!Number.isFinite(seconds))
+		return DEFAULT_STATE_POLLING_INTERVAL
+	return Math.max(seconds, MIN_STATE_POLLING_INTERVAL)
+}
+
 module.exports = (api) => {
 	api.registerPlatform(PLUGIN_NAME, PLATFORM_NAME, OnkyoPioneer)
 }
@@ -22,9 +36,13 @@ class OnkyoPioneer {
 		this.name = config.name || PLATFORM_NAME
 		this.discovery = config.discovery
 		this.receivers = config.receivers || []
-		this.statePollingInterval = config.statePollingInterval
-		if (this.statePollingInterval < 3)
-			this.statePollingInterval = 3
+		// The config schema's default (30) only applies when the settings are saved
+		// through the UI form. A config written by hand, or saved before this option
+		// existed, leaves it undefined, and `undefined < 3` is false, so the minimum
+		// below never applied. Receiver.js then ran setInterval(..., undefined * 1000),
+		// i.e. NaN, which Node treats as 1 ms (TimeoutNaNWarning), polling the receiver
+		// continuously instead of every N seconds.
+		this.statePollingInterval = resolveStatePollingInterval(config.statePollingInterval)
 		this.debug = config.debug || false
 		this.persistPath = path.join(this.api.user.persistPath(), '/../onkyo-pioneer-persist')
 
